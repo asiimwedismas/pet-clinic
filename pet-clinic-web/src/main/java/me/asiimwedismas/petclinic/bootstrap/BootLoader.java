@@ -25,13 +25,11 @@ public class BootLoader  implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Owner owner1 = new Owner();
-        owner1.setId(1L);
         owner1.setFirstName("Micheal");
         owner1.setLastName("Weston");
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
-        owner2.setId(2L);
         owner2.setFirstName("fiona");
         owner2.setLastName("asiimwe");
         ownerService.save(owner2);
@@ -39,13 +37,11 @@ public class BootLoader  implements CommandLineRunner {
         System.out.println("loaded oweners....");
 
         Vet vet1 = new Vet();
-        vet1.setId(1L);
         vet1.setFirstName("same");
         vet1.setLastName("diana");
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
-        vet2.setId(2L);
         vet2.setFirstName("ainebyona");
         vet2.setLastName("daniel");
         vetService.save(vet2);

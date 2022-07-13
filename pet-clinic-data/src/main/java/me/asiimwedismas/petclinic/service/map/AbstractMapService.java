@@ -1,20 +1,24 @@
 package me.asiimwedismas.petclinic.service.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import me.asiimwedismas.petclinic.model.BaseEntity;
 
-public abstract class AbstractMapService<T, ID> {
+import java.util.*;
 
-    protected Map<ID, T> map = new HashMap<>();
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
+
+    protected Map<Long, T> map = new HashMap<>();
 
     T findById(ID id) {
         return map.get(id);
     }
 
-    T save(ID id, T object) {
-        map.put(id, object);
+    T save(T object) {
+        if (object != null){
+            if (object.getId()==  null){
+                object.setId(nextID());
+            }
+        map.put(object.getId(), object);
+        }
         return object;
     }
 
@@ -28,5 +32,14 @@ public abstract class AbstractMapService<T, ID> {
 
     void deleteById(ID id) {
         map.remove(id);
+    }
+
+    private Long nextID(){
+        Set<Long> longs = map.keySet();
+        if (longs.isEmpty()){
+            return 1L;
+        }
+
+        return Collections.max(longs) + 1;
     }
 }
